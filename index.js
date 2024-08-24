@@ -42,7 +42,7 @@ const users = [
 // Routes
 app.get('/', (req, res) => {
     res.render('login', { layout: 'main', title: 'Login', error: '' });
-});
+}); 
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -336,7 +336,7 @@ function requireAuth(req, res, next) {
     next();
 }
 
-app.post('/dashboard', (req, res) => {
+app.post('/dashboard',requireAuth, (req, res) => {
     res.render('dashboard', { layout: 'main', title: 'Dashboard', currentTime: new Date().toLocaleString() });
 });
 
