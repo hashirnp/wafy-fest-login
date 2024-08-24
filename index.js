@@ -22,12 +22,12 @@ app.set('view engine', 'hbs');
 
 
 // Session setup
-app.use(session({
+/* app.use(session({
     secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
-}));
+})); */
 
 // Dummy user data for authentication
 const users = [
@@ -330,9 +330,9 @@ async function getNotification(aff) {
 
 // Middleware to check if the user is authenticated
 function requireAuth(req, res, next) {
-    if (!req.session.userId) {
+    /* if (!req.session.userId) {
         return res.redirect('/');
-    }
+    } */
     next();
 }
 
@@ -342,9 +342,9 @@ app.post('/dashboard',requireAuth, (req, res) => {
 
 // Logout
 app.get('/logout', (req, res) => {
-    req.session.destroy(() => {
+   /* req.session.destroy(() => {
         res.redirect('/');
-    });
+    }); */
 });
 
 // Start the server
