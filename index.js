@@ -17,9 +17,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Handlebars setup
-app.engine('hbs', exphbs.engine({ extname: '.hbs', layoutsDir: __dirname + '/views/layouts/' }));
-app.set('view engine', 'hbs');
+/* app.engine('hbs', exphbs.engine({ extname: '.hbs', layoutsDir: __dirname + '/views/layouts/' }));
+app.set('view engine', 'hbs'); */
 
+
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "public"));
 
 // Session setup
 /* app.use(session({
