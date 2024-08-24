@@ -1,0 +1,159 @@
+{{!-- Extend the main layout --}}
+{{ header title="Dashboard"}}
+
+<div class="dashboard container mt-4 ">
+  {{!-- <div
+    class="text-center mb-5 bg-primary rounded p-2 justify-content-center items-center align-items-center flex">
+    <h1 class="display-4 text-white font-weight-bold">12th WAFY FEST DASHBOARD</h1>
+  </div> --}}
+
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <div class="card shadow-sm rounded-lg">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          College Information
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-md-4 mb-3">
+              <strong>Aff. No:</strong>{{college.aff}}<br>
+              <strong>Zone:</strong> {{college.zone}}<br>
+              <strong>No. of Students:</strong><br>
+              {{#if college.studentsThm}} Thamhheediya: {{college.studentsThm}} <br>{{/if}}
+              {{#if college.studentsAliya}} Aliya: {{college.studentsAliya}} <br>{{/if}}
+              {{#if college.studentsPg}} Aliya: {{college.studentsPg}}<br> {{/if}}
+              <strong>Total:</strong> {{college.total}}
+            </div>
+            <div class="col-md-4 mb-3">
+              <strong>College Name:</strong><br> {{college.name}}<br>
+              <strong>Email:</strong><br> <a href="mailto:{{college.email}}">{{college.email}}</a><br>
+              <strong>Phone:</strong><br> <a href=:"tel:{{college.phone}}">{{college.phone}}</a>
+            </div>
+            <div class="col-md-4 mb-3">
+              <strong>Phase:</strong><br> THM: {{#if college.studentsThm}} YES {{else}} NO {{/if}}, Aliya: {{#if
+              college.studentsAliya}} YES {{else}} NO {{/if}}, PG: {{#if college.studentsPg}} YES {{else}} NO
+              {{/if}}<br>
+              <strong>Address:</strong><br> {{college.address}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <div class="card shadow-sm rounded-lg">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Fest Coordinator & Team Manager
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-md-4 mb-3">
+              <strong>Fest Coordinator (Staff):</strong><br> {{coordinator.coordinator}}<br>
+              <strong>Contact No:</strong><br> <a href="tel:{{coordinator.coordinatorMobile}}">{{coordinator.coordinatorMobile}}</a><br>
+              <strong>WhatsApp No:</strong><br> <a href="https://wa.me/91{{coordinator.coordinatorWhatsApp}}">{{coordinator.coordinatorWhatsApp}}</a>
+            </div>
+            <div class="col-md-4 mb-3">
+              <strong>Team Manager (Student):</strong><br> {{coordinator.manager}}<br>
+              <strong>Contact No:</strong><br> <a href="tel:{{coordinator.managerMobile}}">{{coordinator.managerMobile}}</a><br>
+              <strong>WhatsApp No:</strong><br> <a href="https://wa.me/91{{coordinator.managerWhatsApp}}">{{coordinator.managerWhatsApp}}</a>
+            </div>
+            <div class="col-md-4 mb-3">
+              <strong>Asst. Team Manager:</strong><br> {{coordinator.assistant}}<br>
+              <strong>Contact No:</strong><br> <a href="tel:{{coordinator.assistantMobile}}">{{coordinator.assistantMobile}}</a><br>
+              <strong>WhatsApp No:</strong><br> <a href="https://wa.me/91{{coordinator.assistantWhatsApp}}">{{coordinator.assistantWhatsApp}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center mb-4">
+    <div class="col-md-12">
+      <div class="alert alert-info rounded-lg shadow-sm" role="alert">
+        <strong>Notification Bar:</strong> {{notifcation}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center mb-5">
+    <div class="col-md-12">
+      <a href="#" class="btn btn-danger btn-lg m-2 rounded-pill shadow-sm">Manual</a>
+      <a href="#" class="btn btn-danger btn-lg m-2 rounded-pill shadow-sm">Hall Ticket</a>
+      <a href="#" class="btn btn-danger btn-lg m-2 rounded-pill shadow-sm">Schedule</a>
+      <a href="#" class="btn btn-danger btn-lg m-2 rounded-pill shadow-sm">Topics</a>
+      <a href="#" class="btn btn-danger btn-lg m-2 rounded-pill shadow-sm">All Results</a>
+      <a href="#" class="btn btn-danger btn-lg m-2 rounded-pill shadow-sm">Grace Marks: Qualified Students</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mb-4">
+      <div class="card shadow-sm rounded-lg">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Registration
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered text-center">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Thamhheediya</th>
+                  <th>Aliya</th>
+                  <th>PG</th>
+                  <th>General</th>
+                  <th>Special Programmes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Off Stage: <a href="#">Attendance Sheet</a></td>
+                  <td>On Stage: <a href="#">Attendance Sheet</a></td>
+                  <td>On Stage: <a href="#">Attendance Sheet</a></td>
+                  <td>Off Stage: <a href="#">Attendance Sheet</a></td>
+                  <td>Off Stage: <a href="#">Attendance Sheet</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-md-12">
+      <div class="card shadow-sm rounded-lg">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Result
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered text-center">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Item Wise</th>
+                  <th>Participation Wise</th>
+                  <th>College Wise</th>
+                  <th>PG</th>
+                  <th>Special Programmes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="{{result.item}}" target="_blank">View Results</a></td>
+                  <td><a href="{{result.particiapation}}" target="_blank"> View Results</a></td>
+                  <td><a href="{{result.college}}" target="_blank">View Results</a></td>
+                  <td><a href="{{resilt.pg}}" target="_blank">View Results</a></td>
+                  <td><a href="{{result.special}}" target="_blank">View Results</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
