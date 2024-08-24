@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
 const { auth } = require('./common/sheet.js');
 
 const { google } = require('googleapis');
@@ -29,14 +28,6 @@ app.use(session({
     cookie: { secure: false } // Set to true if using HTTPS
 }));
 
-// Dummy user data for authentication
-const users = [
-    {
-        id: 1,
-        username: 'admin',
-        password: bcrypt.hashSync('password', 10) // hashed password
-    }
-];
 
 
 // Routes
@@ -59,9 +50,10 @@ app.post('/login', async (req, res) => {
         //get registration link 
         var registration = await getRegistrationLink(username);
         //get result
-        var result=await getResult(username);
+        var result = await getResult(username);
         //get notification
-        var notification = await getNotification(username);
+        var notification = await getNotification();
+
 
 
         res.render('dashboard', {
@@ -70,9 +62,9 @@ app.post('/login', async (req, res) => {
             currentTime: new Date().toLocaleString(),
             college: college,
             coordinator: coordinator,
-            registration:registration,
-            result:result,
-            notification:notification
+            registration: registration,
+            result: result,
+            notification: notification
 
         });
     } else {
@@ -281,7 +273,7 @@ async function getResult(aff) {
                 const temp = row[0];
                 if (temp === aff) {
                     const result = {
-                        item: row[1], 
+                        item: row[1],
                         particiapation: row[2],
                         college: row[3],
                         pg: row[4],
@@ -302,14 +294,14 @@ async function getResult(aff) {
     }
 }
 
-async function getNotification(aff) {
+async function getNotification() {
     try {
         const sheets = google.sheets({ version: 'v4', auth });
 
         // Fetch the data from the specified sheet and range
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId: '1B_-iJtl2P2MxwVfo5my0i2f_Ua5AR3RvJMETKsZNsF4',
-            range: 'Results!A2',
+            range: 'Notification!A2',
         });
 
         // The actual data is in response.data.values
@@ -336,7 +328,7 @@ function requireAuth(req, res, next) {
     next();
 }
 
-app.post('/dashboard', (req, res) => {
+app.post('/dashboard', requireAuth, (req, res) => {
     res.render('dashboard', { layout: 'main', title: 'Dashboard', currentTime: new Date().toLocaleString() });
 });
 
