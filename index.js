@@ -1,10 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const session = require('express-session');
 const { auth } = require('./common/sheet.js');
 
 
@@ -25,11 +23,6 @@ app.engine('.hbs', exphbs.engine({
 }));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
-
-
-app.set('views', path.join(__dirname, 'views',));
-
-
 
 app.use(express.static(__dirname + "public"));
 
