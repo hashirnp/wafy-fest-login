@@ -16,24 +16,28 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Handlebars setup
-app.engine('hbs', exphbs.engine({ extname: '.hbs', layoutsDir: __dirname + '/views/layouts/' }));
-app.set('view engine', 'hbs');
+/* app.engine('hbs', exphbs.engine({ extname: '.hbs', layoutsDir: __dirname + '/views/layouts/' }));
+app.set('view engine', 'hbs'); */
 
+
+app.set("views", __dirname + "/views/layouts");
+app.set("view engine", "hbs");
+app.use(express.static(__dirname + "public"));
 
 // Session setup
-app.use(session({
+/* app.use(session({
     secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
-}));
+})); */
 
 
 
 // Routes
 app.get('/', (req, res) => {
     res.render('login', { layout: 'main', title: 'Login', error: '' });
-});
+}); 
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -322,21 +326,21 @@ async function getNotification() {
 
 // Middleware to check if the user is authenticated
 function requireAuth(req, res, next) {
-    if (!req.session.userId) {
+    /* if (!req.session.userId) {
         return res.redirect('/');
-    }
+    } */
     next();
 }
 
-app.post('/dashboard', requireAuth, (req, res) => {
+app.post('/dashboard', (req, res) => {
     res.render('dashboard', { layout: 'main', title: 'Dashboard', currentTime: new Date().toLocaleString() });
 });
 
 // Logout
 app.get('/logout', (req, res) => {
-    req.session.destroy(() => {
+   /* req.session.destroy(() => {
         res.redirect('/');
-    });
+    }); */
 });
 
 // Start the server
@@ -346,4 +350,4 @@ app.listen(PORT, () => {
 });
 
 
-module.exports = { app };
+// module.exports = { app };
