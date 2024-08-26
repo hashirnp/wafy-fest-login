@@ -1,10 +1,12 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const session = require('express-session');
 const { auth } = require('./common/sheet.js');
+
 
 const { google } = require('googleapis');
 
@@ -15,13 +17,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Handlebars setup
-/* app.engine('hbs', exphbs.engine({ extname: '.hbs', layoutsDir: __dirname + '/views/layouts/' }));
-app.set('view engine', 'hbs'); */
+
+app.engine('.hbs', exphbs.engine({
+    defaultLayout: 'main',
+    extname: '.hbs',
+    layoutsDir: path.join(__dirname, 'views/layouts')
+}));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'views'));
 
 
-app.set("views", __dirname + "/views/layouts");
-app.set("view engine", "hbs");
+app.set('views', path.join(__dirname, 'views',));
+
+
+
 app.use(express.static(__dirname + "public"));
 
 // Session setup
@@ -37,7 +46,7 @@ app.use(express.static(__dirname + "public"));
 // Routes
 app.get('/', (req, res) => {
     res.render('login', { layout: 'main', title: 'Login', error: '' });
-}); 
+});
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -338,9 +347,9 @@ app.post('/dashboard', (req, res) => {
 
 // Logout
 app.get('/logout', (req, res) => {
-   /* req.session.destroy(() => {
-        res.redirect('/');
-    }); */
+    /* req.session.destroy(() => {
+         res.redirect('/');
+     }); */
 });
 
 // Start the server
